@@ -1,0 +1,39 @@
+version: 0.2
+
+env:
+  variables:
+    S3_BUCKET: "juggernaut-encrypt-lambda"
+    AWS_DEFAULT_REGION: "ap-south-1"
+  #parameter-store:
+     # key: "value"
+     # key: "value"
+
+phases:
+  #install:
+    #commands:
+      # - command
+      # - command
+  #pre_build:
+    #commands:
+      # - command
+      # - command
+  build:
+    commands:
+      - pip install -r requirements.txt -t source/
+      - echo "building is started" 
+  post_build:
+    commands:
+      - apt-get update
+      - apt-get -y install zip unzip
+      - cd source
+      - zip -r encrypt_lambda_source.zip *
+artifacts:
+  files:
+    - output/EPUB_ENCRYPT_CRUSADERS.zip
+    # - location
+  #name: $(date +%Y-%m-%d)
+  discard-paths: yes
+  base-directory: ./
+#cache:
+ # paths:
+  #   - ./
