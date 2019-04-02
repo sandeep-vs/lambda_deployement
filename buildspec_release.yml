@@ -19,10 +19,11 @@ phases:
       # - command
   build:
     commands:
-      - pip install -r requirements.txt -t source/
+     # - pip install -r requirements.txt -t source/
       - echo "building is started" 
   post_build:
     commands:
+      - echo "post build is started"
       - apt-get update
       - apt-get -y install zip unzip
       - cd source
